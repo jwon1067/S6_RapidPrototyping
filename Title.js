@@ -118,7 +118,7 @@ class Intro extends Phaser.Scene{
         [...title].forEach((letter, i) => {
 
             let char = this.add.text(
-                75 + (i * 50) - (title[i] === 'N' ? 20 : 0), // horizontal spacing
+                75 + (i * 50), // horizontal spacing
                 i % 2 === 0 ? -100 : 600, // alternate top/bottom
                 letter,
                 {
