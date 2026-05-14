@@ -137,7 +137,7 @@ class Title extends Phaser.Scene{
                     ease: 'Sine.inOut',
                     onComplete: () => {
                         this.tweens.add({ // title appwear
-                            targets: this.add.text(100, 80, "Roly Poly:  To the End", {
+                            targets: this.add.text(100, 80, "Roly Poly: To the End", {
                                 fontFamily: '"Press Start 2P"', // Loaded font
                                 fontSize: '64px',
                                 color: '#ffffff',
@@ -242,12 +242,14 @@ class Victory extends Phaser.Scene{
                         ease: 'Power2',
                         onComplete: () => {
                             this.tweens.add({ // message appear
-                                targets: [this.add.text(
-                                        260,     // x
-                                        100,    // y
-                                        "VICTORY!", // text
-                                        { font: "60px Press Start 2P", color: "#ffffff" } // white text
-                                    ), this.add.text(
+                                targets: [this.add.text(250, 80, "VICTORY!", {
+                                    fontFamily: '"Press Start 2P"', // Loaded font
+                                    fontSize: '64px',
+                                    color: '#ffffff',
+                                    stroke: '#000000',
+                                    strokeThickness: 8,
+                                    shadow: { blur: 10, fill: true, color: '#000000' }
+                                }), this.add.text(
                                         270,     // x
                                         180,    // y
                                         " Would you like\n  to play again?", // text
