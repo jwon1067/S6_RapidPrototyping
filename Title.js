@@ -158,7 +158,7 @@ class Menu extends Phaser.Scene{
         super('menu');
     }
     preload(){
-        this.load.image('background', 'assests/WhitePawBlkBg.png');
+        this.load.image('background', 'assests/anarkaliart-ai-generated-8309295.jpg');
         this.load.image('fairy', 'assests/greenFairy.png');
     }
     create(){
