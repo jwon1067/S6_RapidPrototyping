@@ -68,14 +68,14 @@ class Loading extends Phaser.Scene{
     create(){  
     
         // Rectangle frame: rectangle with no fill (centerX, centerY, width, height) border (width, color, opacity)
-        this.add.rectangle(400, 270, 600, 50).setStrokeStyle(8, 0xffffff);
+        this.add.rectangle(400, 270, 600, 50).setStrokeStyle(8, 0xb6f0deff);
         
         // Loading Text
         this.textObject = this.add.text(
             300,     // x
             150,    // y
             "Loading...", // text
-            { font: "50px Press Start 2P", color: "#ffffff" } // size & font, color
+            { font: "50px Press Start 2P", color: "#b6f0deff" } // size & font, color
         );
 
         // Fade in Scene
@@ -83,7 +83,7 @@ class Loading extends Phaser.Scene{
 
         // Loading Bar
         this.tweens.add({ //bar: rectangle(x, y, fade at x of bar, height, color).setOrigin(Left to Right)
-            targets: this.add.rectangle(110, 270, 0, 30, 0xffffff).setOrigin(0, 0.5), 
+            targets: this.add.rectangle(110, 270, 0, 30, 0xb6f0deff).setOrigin(0, 0.5), 
             width: 580, 
             alpha: 1, // Opacity: full
             duration: 2000, //duration of action
@@ -182,7 +182,7 @@ class Menu extends Phaser.Scene{
         this.textObject = this.add.text(
             80,     // x
             100,    // y
-            "Roly Poly:\nTo the End",
+            "Roly Poly: To the End",
             { font: "60px Press Start 2P", color: "#ffffff" } // white text
         );
 
@@ -200,7 +200,7 @@ let config = {
         width: 800, 
         height: 500, 
     },
-    backgroundColor: 0x000000,
+    backgroundColor: #76bdafff,
     scene: [Loading, Intro, Menu],
 }
 
