@@ -113,7 +113,7 @@ class Intro extends Phaser.Scene{
         bg.setDisplaySize(this.sys.canvas.width, this.sys.canvas.height);
 
         // Add Moving Text
-        let title = "Roly Poly: To the End";
+        let title = "Roly Poly:\nTo the End";
 
         [...title].forEach((letter, i) => {
 
@@ -182,7 +182,7 @@ class Menu extends Phaser.Scene{
         this.textObject = this.add.text(
             80,     // x
             100,    // y
-            "Roly Poly: To the End",
+            "Roly Poly:\nTo the End",
             { font: "60px Press Start 2P", color: "#ffffff" } // white text
         );
 
