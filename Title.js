@@ -105,7 +105,7 @@ class Intro extends Phaser.Scene{
         super('intro');
     }
     preload(){
-        this.load.image('background', 'assests/anarkaliart-ai-generated-8309295.png');
+        this.load.image('background', 'assets/anarkaliart-ai-generated-8309295.png');
     }
     create(){
         //set background image (WhitePawBlkBg.png)
@@ -158,8 +158,8 @@ class Menu extends Phaser.Scene{
         super('menu');
     }
     preload(){
-        this.load.image('background', 'assests/anarkaliart-ai-generated-8309295.png');
-        this.load.image('fairy', 'assests/greenFairy.png');
+        this.load.image('background', 'assets/anarkaliart-ai-generated-8309295.png');
+        this.load.image('fairy', 'assets/greenFairy.png');
     }
     create(){
         //set background image (WhitePawBlkBg.png)
