@@ -105,7 +105,7 @@ class Intro extends Phaser.Scene{
         super('intro');
     }
     preload(){
-        this.load.image('background', 'assests/anarkaliart-ai-generated-8309295.jpg');
+        this.load.image('background', 'assests/anarkaliart-ai-generated-8309295.png');
     }
     create(){
         //set background image (WhitePawBlkBg.png)
@@ -158,7 +158,7 @@ class Menu extends Phaser.Scene{
         super('menu');
     }
     preload(){
-        this.load.image('background', 'assests/anarkaliart-ai-generated-8309295.jpg');
+        this.load.image('background', 'assests/anarkaliart-ai-generated-8309295.png');
         this.load.image('fairy', 'assests/greenFairy.png');
     }
     create(){
@@ -182,7 +182,7 @@ class Menu extends Phaser.Scene{
         this.textObject = this.add.text(
             80,     // x
             100,    // y
-            "Block Captain",
+            "Roly Poly: To the End",
             { font: "60px Press Start 2P", color: "#ffffff" } // white text
         );
 
