@@ -3,13 +3,13 @@ class Beveal extends Phaser.GameObjects.Container {
     constructor(scene, x, y) {
         super(scene, x, y);
         // Shapes
-        let topT = scene.add.triangle(0, 0, 73, 23, 148, 73, 223, 23, 0x83C5BE);
-        let leftT = scene.add.triangle(0, 0, 23, 33, 73, 66, 23, 103, 0x42999B);
-        let rightT = scene.add.triangle(0, 0, 173, 103, 123, 66, 173, 33, 0x218389);
-        let bottomT = scene.add.triangle(0, 0, 73, 98, 148, 38, 223, 98, 0x006D77);
+        let topT = scene.add.triangle(0, 0, 73, 23, 148, 73, 223, 23, 0xADB5BD);
+        let leftT = scene.add.triangle(0, 0, 23, 33, 73, 66, 23, 103, 0x495057);
+        let rightT = scene.add.triangle(0, 0, 173, 103, 123, 66, 173, 33, 0x343A40);
+        let bottomT = scene.add.triangle(0, 0, 73, 98, 148, 38, 223, 98, 0x212529);
         
         let rect = scene.add.graphics();
-            rect.fillGradientStyle(0x006D77, 0x006D77, 0x006D77, 0x83C5BE, 1);
+            rect.fillGradientStyle(0x212529, 0x212529, 0x212529, 0xADB5BD, 1);
             rect.fillRect(13, 8, 119, 48);
         
         // Container of shapes
@@ -105,33 +105,67 @@ class Title extends Phaser.Scene{
         super('title');
     }
     preload(){
-        this.load.image('storyBook', 'assets/AdobeStock_1052679189.jpeg');
+        this.load.image('background', 'assets/anarkaliart-ai-generated-8309295.png');
         this.load.image('fairy1', 'assets/greenFairy.png');
+        this.load.image('rolyPoly', 'assets/rolyPoly.png');
     }
     create(){
         //set background image
-        let bg = this.add.image(this.sys.canvas.width / 2, this.sys.canvas.height / 2, 'storyBook');
+        let bg = this.add.image(this.sys.canvas.width / 2, this.sys.canvas.height / 2, 'background');
         bg.setDisplaySize(this.sys.canvas.width, this.sys.canvas.height);
 
         //green fairy picture
-        this.imageObject = this.add.image(550, 275, 'fairy1');
-        this.imageObject.setScale(0.48);
+        let greenFairy = this.add.image(170, 275, 'fairy1').setScale(0).setAlpha(0); // start invisible
 
-        //Add buttons
-        new Button(this, 160, 180, 'Start', () => {
-            this.scene.start('victory'); 
+         // add roly poly
+        this.imageObject = this.add.image(310, 420, 'rolyPoly');
+        this.imageObject.setScale(0.35);
+
+        // fairy animation sequence
+        this.tweens.add({ // fairy appear
+            targets: greenFairy,
+            alpha: 1,
+            scale: 0.48,
+            duration: 500,
+            ease: 'Back.out(2)',
+            onComplete: () => {
+                this.tweens.add({ // horizontal spin
+                    targets: greenFairy,
+                    scaleX: 0, 
+                    duration: 100,
+                    yoyo: true,
+                    ease: 'Sine.inOut',
+                    onComplete: () => {
+                        this.tweens.add({ // title appwear
+                            targets: this.add.text(100, 80, "Roly Poly:  To the End", {
+                                fontFamily: '"Press Start 2P"', // Loaded font
+                                fontSize: '64px',
+                                color: '#ffffff',
+                                stroke: '#000000',
+                                strokeThickness: 8,
+                                shadow: { blur: 10, fill: true, color: '#000000' }
+                            }).setAlpha(0), // start invisible
+                            alpha: 1,
+                            delay: 200,
+                            duration: 200,
+                            ease: 'Back.out(2)',
+                            onComplete: () => {
+                                this.tweens.add({ // button appear
+                                    targets: [new Button(this, 550, 180, 'Start', () => {
+                                                this.scene.start('victory'); 
+                                            }).setAlpha(0), // start invisible,
+                                            new Button(this, 550, 260, 'Exit', () => {}).setAlpha(0),
+                                            new Button(this, 550, 340, 'Menu', () => {}).setAlpha(0)],
+                                    alpha: 1,
+                                    duration: 500,
+                                    ease: 'Back.out(2)',
+                                });
+                            }
+                        });
+                    }
+                });
+            }
         });
-
-        new Button(this, 160, 260, 'Exit', () => {});
-
-        new Button(this, 160, 340, 'Menu', () => {});
-
-        this.textObject = this.add.text(
-            120,     // x
-            100,    // y
-            "Roly Poly:   To the End",
-            { font: "60px Press Start 2P", color: "#ffffff" } // white text
-        );
 
         // Fade in Scene
         this.cameras.main.fadeIn(500);
@@ -185,6 +219,9 @@ class Victory extends Phaser.Scene{
         this.imageObject = this.add.image(370, 420, 'rolyPoly');
         this.imageObject.setScale(0.35);
 
+        // add banner
+        let bannerObj = this.add.image(400, 250, 'banner').setScale(0).setAlpha(0); // start invisible
+
         // Add moving fairies
         let i = 0; // index for fairies
 
@@ -196,7 +233,40 @@ class Victory extends Phaser.Scene{
 
         let playFairy = () => {
             if (i >= this.fairies.length){ 
-                   this.imageObject = this.add.image(380, 250, 'banner').setScale(0.12);
+                   this.tweens.add({ // banner pop in
+                        targets: bannerObj,
+                        alpha: 1,
+                        scale: 0.12,
+                        delay: 500,
+                        duration: 500,
+                        ease: 'Power2',
+                        onComplete: () => {
+                            this.tweens.add({ // message appear
+                                targets: [this.add.text(
+                                        260,     // x
+                                        100,    // y
+                                        "VICTORY!", // text
+                                        { font: "60px Press Start 2P", color: "#ffffff" } // white text
+                                    ), this.add.text(
+                                        270,     // x
+                                        180,    // y
+                                        " Would you like\n  to play again?", // text
+                                        { font: "40px Press Start 2P", color: "#ffffff" } // white text
+                                    )],
+                                delay: 500,
+                                duration: 500,
+                                ease: 'Power2',
+                                onComplete: () => { 
+                                    this.tweens.add({ // buttons appear
+                                        targets: new Button(this, 320, 320, 'Start', () => {this.scene.start('title');}),
+                                        delay: 500,
+                                        duration: 500,
+                                        ease: 'Power2',
+                                    });
+                                }
+                            });
+                        }
+                    });
                 return; 
             }
 
