@@ -200,7 +200,7 @@ let config = {
         width: 800, 
         height: 500, 
     },
-    backgroundColor: #76bdafff,
+    backgroundColor: 0x76bdafff,
     scene: [Loading, Intro, Menu],
 }
 
