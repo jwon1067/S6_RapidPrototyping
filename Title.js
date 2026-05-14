@@ -64,26 +64,34 @@ class Loading extends Phaser.Scene{
     init(data){
         this.nextScene = data.next || 'title';
     }
-    preload(){}
+    preload(){
+        this.load.image('background', 'assets/anarkaliart-ai-generated-8309295.png');
+    }
     create(){  
-    
+        
+        //set background image
+        let bg = this.add.image(this.sys.canvas.width / 2, this.sys.canvas.height / 2, 'background');
+        bg.setDisplaySize(this.sys.canvas.width, this.sys.canvas.height);
+
         // Rectangle frame: rectangle with no fill (centerX, centerY, width, height) border (width, color, opacity)
-        this.add.rectangle(400, 270, 600, 50).setStrokeStyle(8, 0x83c5be);
+        this.add.rectangle(400, 270, 600, 50).setStrokeStyle(8, 0xffffff);
         
         // Loading Text
-        this.textObject = this.add.text(
-            300,     // x
-            150,    // y
-            "Loading...", // text
-            { font: "50px Press Start 2P", color: "#83c5be" } // size & font, color
-        );
+        this.textObject = this.add.text(300, 150, "Loading...", {
+            fontFamily: '"Press Start 2P"', // Loaded font
+            fontSize: '64px',
+            color: '#ffffff',
+            stroke: '#000000',
+            strokeThickness: 8,
+            shadow: { blur: 10, fill: true, color: '#000000' }
+        });
 
         // Fade in Scene
         this.cameras.main.fadeIn(500);
 
         // Loading Bar
         this.tweens.add({ //bar: rectangle(x, y, fade at x of bar, height, color).setOrigin(Left to Right)
-            targets: this.add.rectangle(110, 270, 0, 30, 0x83c5be).setOrigin(0, 0.5), 
+            targets: this.add.rectangle(110, 270, 0, 30, 0xffffff).setOrigin(0, 0.5), 
             width: 580, 
             alpha: 1, // Opacity: full
             duration: 2000, //duration of action
